@@ -11,7 +11,7 @@ import Foundation
 
 public class AmazonInterviewQ2: Solution {
   
-  typealias Input = (word: String, a: Int, b: Int)
+  typealias Input = (server_states: String, k: Int)
   
   let input: Input
   
@@ -60,7 +60,30 @@ After 2 operations, a maximum of 8 consecutive ON servers can be obtained.
   }
   
   func execute() -> Int? {
-    return nil
+    let servers = Array(input.server_states)
+    var left = 0, right = 0
+    var previousLeftValue: Character = "1", previousRightValue: Character = "1"
+    var zeroCount = 0
+    var maxConsecutiveOnServers = 0
+    while right < servers.count {
+      if servers[right] == "0" && previousRightValue != "0" {
+        zeroCount += 1
+      }
+      while zeroCount > input.k {
+        if servers[left] == "0" && previousLeftValue != "0" {
+          zeroCount -= 1
+        }
+        previousLeftValue = servers[left]
+        left += 1
+      }
+      
+      previousRightValue = servers[right]
+      right += 1
+      
+      maxConsecutiveOnServers = max(maxConsecutiveOnServers, right - left)
+      print("[\(left)...\(right)]: \(servers[left..<right]), consecutiveOnServers: \(right - left) zeroCount: \(zeroCount), maxConsecutiveOnServers: \(maxConsecutiveOnServers)")
+    }
+    return maxConsecutiveOnServers
   }
 }
 

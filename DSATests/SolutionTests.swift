@@ -84,4 +84,32 @@ final class SolutionTests: XCTestCase {
       )
     }
   }
+  
+  func test_amazonInterviewQ1() {
+    let expectations = [(
+      input: (word: "abbacc", a: -1, b: 2),
+      expectedOutput: 5
+    )]
+    
+    expectations.forEach { input, expectedOutput in
+      XCTAssertEqual(
+        AmazonInterviewQ1(input: input).execute(),
+        expectedOutput
+      )
+    }
+  }
+  
+  func test_amazonInterviewQ2() {
+    let expectations = [(
+      input:(server_states: "11101010110011", k: 2),
+      expectedOutput:8
+    )]
+    
+    expectations.forEach { input, expectedOutput in
+      XCTAssertEqual(
+        AmazonInterviewQ2(input: input).execute(),
+        expectedOutput
+      )
+    }
+  }
 }
